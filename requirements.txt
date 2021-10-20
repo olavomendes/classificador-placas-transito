@@ -1,0 +1,40 @@
+absl-py @ file:///home/conda/feedstock_root/build_artifacts/absl-py_1634676905105/work
+astor @ file:///home/conda/feedstock_root/build_artifacts/astor_1593610464257/work
+attrs==21.2.0
+certifi==2021.10.8
+cycler==0.10.0
+dataclasses @ file:///home/conda/feedstock_root/build_artifacts/dataclasses_1628958434797/work
+gast @ file:///home/conda/feedstock_root/build_artifacts/gast_1624952364672/work
+google-pasta==0.2.0
+grpcio @ file:///home/conda/feedstock_root/build_artifacts/grpcio_1604365513151/work
+h5py==2.8.0
+importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1630267469306/work
+joblib @ file:///tmp/build/80754af9/joblib_1601912903842/work
+Keras==2.3.1
+Keras-Applications==1.0.8
+Keras-Preprocessing @ file:///home/conda/feedstock_root/build_artifacts/keras-preprocessing_1610713559828/work
+kiwisolver @ file:///home/conda/feedstock_root/build_artifacts/kiwisolver_1604322297326/work
+Markdown @ file:///home/conda/feedstock_root/build_artifacts/markdown_1614595805172/work
+matplotlib @ file:///tmp/build/80754af9/matplotlib-base_1592846017414/work
+mediapipe==0.8.5
+numpy==1.16.4
+opencv-contrib-python==4.5.2.54
+pandas @ file:///tmp/build/80754af9/pandas_1602088128026/work
+protobuf==3.17.3
+pyparsing==2.4.7
+python-dateutil==2.8.1
+pytz==2020.1
+PyYAML==5.3.1
+scikit-learn @ file:///tmp/build/80754af9/scikit-learn_1598376882706/work
+scipy @ file:///tmp/build/80754af9/scipy_1597686661256/work
+six==1.16.0
+tensorboard==1.14.0
+tensorflow @ file:///home/conda/feedstock_root/build_artifacts/tensorflow_1594833314895/work/tensorflow_pkg/tensorflow-1.14.0-cp37-cp37m-linux_x86_64.whl
+tensorflow-estimator==1.14.0
+termcolor==1.1.0
+threadpoolctl @ file:///tmp/tmp9twdgx9k/threadpoolctl-2.1.0-py3-none-any.whl
+tornado @ file:///home/conda/feedstock_root/build_artifacts/tornado_1604105014127/work
+typing-extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1632313171031/work
+Werkzeug @ file:///home/conda/feedstock_root/build_artifacts/werkzeug_1621518206714/work
+wrapt @ file:///home/conda/feedstock_root/build_artifacts/wrapt_1606141202967/work
+zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1633302054558/work
