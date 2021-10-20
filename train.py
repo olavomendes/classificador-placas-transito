@@ -30,6 +30,7 @@ validation_ratio = 0.2 # 20% das imagens para validação
 count = 0
 images = []
 num_classes = []
+num_classes_len = (len(num_classes))
 class_list = os.listdir(path)
 print('Total de classes: ', len(class_list))
 print('Importando classes...')
@@ -51,6 +52,7 @@ x_train, x_test, y_train, y_test = train_test_split(images, num_classes, test_si
 x_train, x_validation, y_train, y_validation = train_test_split(x_train, y_train, test_size=validation_ratio)
 
 print('Treino:', x_train.shape, y_train.shape)
+print('Teste: ', x_test.shape, y_test.shape)
 print('Validação:', x_validation.shape, y_validation.shape)
 
 #### Arquivo .csv com as classes
@@ -60,7 +62,7 @@ print(data.shape, type(data))
 #### Exibição de algumas imagens de todas as classes
 num_samples = []
 # cols = 5
-# num_classes = len(class_list)
+# num_classes = num_classes_len
 # fig, axs = plt.subplots(nrows=num_classes, ncols=cols, figsize=(5, 300))
 # fig.tight_layout()
 
@@ -75,9 +77,52 @@ num_samples = []
 
 #### Gráfigo de barras com o número de imagens de cada categoria
 plt.figure(figsize=(12, 5))
-plt.bar(range(0, num_classes), num_samples)
+plt.bar(range(0, num_classes_len), num_samples)
 plt.title('Distruição dos dados de treino')
 plt.xlabel('Número de classes')
 plt.ylabel('Número de imagens')
 
-plt.show()
+# plt.show()
+
+#### Pré processamento das imagens
+def grayscale(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return img
+
+def equalize(img):
+    img = cv2.equalizeHist(img)
+    return img
+
+def preprocessing(img):
+    img = grayscale(img)
+    img = equalize(img)
+    img = img/255 # normaliza as imagens entre 0 e 1 ao invés de 0 a 255
+    return img
+
+x_train = np.array(list(map(preprocessing, x_train)))
+x_validation = np.array(list(map(preprocessing, x_validation)))
+x_test = np.array(list(map(preprocessing, x_test)))
+
+x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], 1) # adiciona depth 1
+x_validation = x_validation.reshape(x_validation.shape[0], x_validation.shape[1], x_validation.shape[2], 1)
+x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1)
+
+#### Geração de mais imagens (data augmentation)
+data_gen = ImageDataGenerator(width_shift_range=0.1, # 10%
+                              height_shift_range=0.1,
+                              zoom_range=0.2,
+                              shear_range=0.1,
+                              rotation_range=10)
+data_gen.fit(x_train)
+batches = data_gen.flow(x_train, y_train, batch_size=20)
+x_batch, y_batch = next(batches)
+
+y_train = to_categorical(y_train, num_classes_len)
+y_validation = to_categorical(y_validation, num_classes_len)
+y_test = to_categorical(y_test, num_classes_len)
+
+print('Treino:', y_train.shape)
+print('Validação:', y_validation.shape)
+print('Teste:', y_test.shape)
+
+### Criação da CNN
