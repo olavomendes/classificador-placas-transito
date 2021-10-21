@@ -27,10 +27,10 @@ test_ratio = 0.2 # 20% das imagens para teste
 validation_ratio = 0.2 # 20% das imagens para validação
 
 # Importação das imagens
-count = 0
+count = 0 # Contador de imagens
 images = []
-num_classes = []
-class_list = os.listdir(path)
+num_classes = [] # Núumero de classes
+class_list = os.listdir(path) 
 num_classes_len = len(class_list)
 
 print('Total de classes: ', len(class_list))
@@ -45,7 +45,7 @@ for i in range(0, len(class_list)):
     count += 1
 print(' ')
 
-images = np.array(images)
+images = np.array(images) # Converte as imagens em array
 num_classes = np.array(num_classes)
 
 
@@ -61,39 +61,14 @@ print('Validação:', x_validation.shape, y_validation.shape)
 data = pd.read_csv(label_file)
 print(data.shape, type(data))
 
-# Exibição de algumas imagens de todas as classes
-num_samples = []
-# cols = 5
-# num_classes = num_classes_len
-# fig, axs = plt.subplots(nrows=num_classes, ncols=cols, figsize=(5, 300))
-# fig.tight_layout()
-
-# for i in range(cols):
-#     for j, row in data.iterrows():
-#         x_selected = x_train[y_train == j]
-#         axs[j][i].imshow(x_selected[random.randint(0, len(x_selected) - 1), :, :], cmap=plt.get_cmap('gray'))
-#         axs[j][i].axis('off')
-#         if i == 2:
-#             axs[j][i].set_title(str(j) + '-' + row['Name'])
-#             num_samples.append(len(x_selected))
-
-# Gráfigo de barras com o número de imagens de cada categoria
-# plt.figure(figsize=(12, 5))
-# plt.bar(range(0, num_classes_len), num_samples)
-# plt.title('Distruição dos dados de treino')
-# plt.xlabel('Número de classes')
-# plt.ylabel('Número de imagens')
-
-# plt.show()
-
 
 # Pré processamento das imagens
-def grayscale(img):
+def grayscale(img): # Converte para a escala de cinza
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return img
 
 
-def equalize(img):
+def equalize(img): # Equaliza as imagens
     img = cv2.equalizeHist(img)
     return img
 
@@ -101,11 +76,11 @@ def equalize(img):
 def preprocessing(img):
     img = grayscale(img)
     img = equalize(img)
-    img = img/255  # normaliza as imagens entre 0 e 1 ao invés de 0 a 255
+    img = img/255  # Normaliza as imagens entre 0 e 1 ao invés de 0 a 255
     return img
 
 
-x_train = np.array(list(map(preprocessing, x_train)))
+x_train = np.array(list(map(preprocessing, x_train))) # Aplica a função de pré processamento em todas as imagens de treino
 x_validation = np.array(list(map(preprocessing, x_validation)))
 x_test = np.array(list(map(preprocessing, x_test)))
 
@@ -123,7 +98,7 @@ data_gen.fit(x_train)
 batches = data_gen.flow(x_train, y_train, batch_size=20)
 x_batch, y_batch = next(batches)
 
-y_train = to_categorical(y_train, num_classes_len)
+y_train = to_categorical(y_train, num_classes_len) 
 y_validation = to_categorical(y_validation, num_classes_len)
 y_test = to_categorical(y_test, num_classes_len)
 
@@ -170,7 +145,7 @@ history = model.fit_generator(data_gen.flow(x_train, y_train, batch_size=batch_s
                             validation_data=(x_validation, y_validation),
                             shuffle=7)
 
-# Resultados
+# Exibe os resultados
 plt.figure(1)
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
@@ -191,7 +166,7 @@ score = model.evaluate(x_test, y_test, verbose=0)
 print('Pontuação de teste:', score[0])
 print('Acurácia de teste:', score[1])
 
-# Salvamento do modelo
+# Salva o modelo para usos futuros
 final_model = open('final_model.p', 'wb')
 pickle.dump(model, final_model)
 final_model.close()
