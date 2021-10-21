@@ -126,3 +126,29 @@ print('Validação:', y_validation.shape)
 print('Teste:', y_test.shape)
 
 ### Criação da CNN
+def conv_model():
+    num_filters = 60
+    filter_size = (5, 5)
+    filter_size_2 = (3, 3)
+    pool_size = (2, 2)
+    num_nodes = 500
+
+    model = Sequential()
+    model.add((Conv2D(num_filters, filter_size, input_shape=(image_dim[0], image_dim[1], 1), activation='relu')))
+    model.add((Conv2D(num_filters, filter_size, activation='relu')))
+    model.add(MaxPooling2D(pool_size=pool_size))
+
+    model.add((Conv2D(num_filters//2, filter_size_2, activation='relu')))
+    model.add((Conv2D(num_filters//2, filter_size_2, activation='relu')))
+    model.add(MaxPooling2D(pool_size=pool_size))
+    model.add(Dropout(0.5))
+
+    model.add(Flatten())
+    model.add(Dense(num_nodes, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(num_classes, activation='softmax'))
+
+    model.compile(Adam(lr=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
+
+    return model
+
