@@ -20,8 +20,8 @@ path = 'Classificador - Placas de Trânsito/dataset' # pasta com as imagens e cl
 print(path)
 label_file = 'Classificador - Placas de Trânsito/labels.csv' #arquivo com os nomes das classes
 batch_size = 50 
-steps_per_epoch = 2000
-epochs = 30
+steps_per_epoch = 1000 # Para melhores resultados, recomendo colocar 2000 
+epochs = 10 # # Para melhores resultados, recomendo colocar 30
 image_dim = (32, 32, 3)
 test_ratio = 0.2 # 20% das imagens para teste
 validation_ratio = 0.2 # 20% das imagens para validação
