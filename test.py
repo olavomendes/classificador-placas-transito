@@ -15,7 +15,7 @@ cap.set(4, frame_h)
 cap.set(10, brightness)
 
 # Importação do modelo
-pickle_in = open('Classificador - Placas de Trânsito/final_model.p', 'rb')
+pickle_in = open('final_model.p', 'rb')
 model = pickle.load(pickle_in)
 
 # Pré processamento da webcam
