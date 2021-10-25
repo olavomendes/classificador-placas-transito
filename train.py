@@ -16,9 +16,9 @@ from sklearn.model_selection import train_test_split
 
 
 # Parâmetros
-path = 'Classificador - Placas de Trânsito/dataset' # pasta com as imagens e classes
+path = 'dataset' # pasta com as imagens e classes
 print(path)
-label_file = 'Classificador - Placas de Trânsito/labels.csv' #arquivo com os nomes das classes
+label_file = 'labels.csv' #arquivo com os nomes das classes
 batch_size = 50 
 steps_per_epoch = 1000 # Para melhores resultados, recomendo colocar 2000 
 epochs = 10 # # Para melhores resultados, recomendo colocar 30
